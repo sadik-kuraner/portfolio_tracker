@@ -31,3 +31,23 @@ def aantal_aandelen_per_sheet(schone_sheets):
         aandelen_per_sheet[sheet_naam] = aandelen_per_aankoop_berekenen(df)
 
     return aandelen_per_sheet
+
+
+def totaal_aantal_aandelen_berekenen(aandelen_per_sheet):
+    """
+    Berekent per aandelensheet het totaal aantal gekochte aandelen.
+
+    Parameters:
+    aandelen_per_sheet (dict): dict met tickers als keys en Series met
+    gekochte aandelen per aankoop als values.
+
+    Returns:
+    dict: dict met tickers als keys en totaal aantal gekochte aandelen als values.
+    """
+
+    totaal_aantal_aandelen = {}
+
+    for sheet_naam, aandelen in aandelen_per_sheet.items():
+        totaal_aantal_aandelen[sheet_naam] = aandelen.sum()
+
+    return totaal_aantal_aandelen
