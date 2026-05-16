@@ -51,3 +51,33 @@ def totaal_aantal_aandelen_berekenen(aandelen_per_sheet):
         totaal_aantal_aandelen[sheet_naam] = aandelen.sum()
 
     return totaal_aantal_aandelen
+
+
+def totale_investering_en_kosten(schone_sheets):
+    """
+    Geef per sheet: totale investering, totale kosten en totale investering inclusief kosten.
+
+    Parameters:
+    schone_sheets (dict): dictionary met sheetnamen als keys en schoongemaakte
+    DataFrames als values.
+
+    Returns:
+    tuple: Drie dictionaries:
+    totale_investering bevat per sheet de som van de kolom "Geïnvesteerd".
+    totale_kosten bevat per sheet de som van de kolom "Kosten".
+    totale_investering_inclusief_kosten bevat per sheet investering plus kosten.
+    """
+
+    totale_investering = {}
+    totale_kosten = {}
+    totale_investering_inclusief_kosten = {}
+
+    for sheet_naam, sheet_data in schone_sheets.items():
+        totale_investering[sheet_naam] = sheet_data["Geïnvesteerd"].sum()
+        totale_kosten[sheet_naam] = sheet_data["Kosten"].sum()
+
+        totale_investering_inclusief_kosten[sheet_naam] = (
+            totale_investering[sheet_naam] + totale_kosten[sheet_naam]
+        )
+
+    return totale_investering, totale_kosten, totale_investering_inclusief_kosten

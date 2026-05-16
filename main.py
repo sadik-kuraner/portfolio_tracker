@@ -1,13 +1,23 @@
 from excel_utils import verwerk_excel_data
-from aandelen_berekeningen import aantal_aandelen_per_sheet
+from aandelen_berekeningen import (
+    aantal_aandelen_per_sheet,
+    totaal_aantal_aandelen_berekenen,
+    totale_investering_en_kosten,
+)
 
-# Controleer de schone sheets en bereken het aantal aandelen
+# Lees de schone sheets in en bereken: totaal aantal aandelen, investering en kosten
 schone_sheets = verwerk_excel_data()
 
 if schone_sheets is not None:
-    print(schone_sheets.keys())
-
+    # Bereken de belangrijkste portfolio overzichten
     aantal_aandelen = aantal_aandelen_per_sheet(schone_sheets)
-    print(aantal_aandelen.keys())
+    totaal_aandelen = totaal_aantal_aandelen_berekenen(aantal_aandelen)
+    totale_investering, totale_kosten, totale_investering_inclusief_kosten = (
+        totale_investering_en_kosten(schone_sheets)
+    )
+
+    print(totaal_aandelen)
+    print(totale_investering_inclusief_kosten)
+
 else:
     print("Geen data om te tonen")
