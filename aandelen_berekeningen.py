@@ -81,3 +81,31 @@ def totale_investering_en_kosten(schone_sheets):
         )
 
     return totale_investering, totale_kosten, totale_investering_inclusief_kosten
+
+
+def gak_berekenen(totale_investering_inclusief_kosten, totaal_aantal_aandelen):
+    """
+    Berekent de GAK (Gemiddelde Aankoopprijs) per sheet.
+
+    Parameters:
+    totale_investering_inclusief_kosten (dict): dictionary met sheetnaam als key
+    en totale investering inclusief kosten als value.
+    totaal_aantal_aandelen (dict): dictionary met sheetnaam als key en totaal aantal
+    aandelen als value.
+
+    Returns:
+    gak_per_aandeel (dict): dictionary met sheetnaam als key en GAK als value.
+    """
+
+    gak_per_sheet = {}
+
+    for sheet_naam, investering in totale_investering_inclusief_kosten.items():
+        if totaal_aantal_aandelen[sheet_naam] == 0:
+            gak_per_sheet[sheet_naam] = 0
+        else:
+            gak_per_sheet[sheet_naam] = (
+                totale_investering_inclusief_kosten[sheet_naam]
+                / totaal_aantal_aandelen[sheet_naam]
+            )
+
+    return gak_per_sheet
