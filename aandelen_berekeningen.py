@@ -109,3 +109,42 @@ def gak_berekenen(totale_investering_inclusief_kosten, totaal_aantal_aandelen):
             )
 
     return gak_per_sheet
+
+
+def huidige_waarde_berekenen(aantal_aandelen, huidige_prijs):
+    """
+    Berekent de huidige waarde van één aandeelpositie.
+
+    Parameters:
+    aantal_aandelen (float): het aantal aandelen dat je bezit.
+    huidige_prijs (float): de huidige prijs van één aandeel.
+
+    Returns:
+    float: de huidige waarde van deze aandeelpositie.
+    """
+
+    huidige_waarde = aantal_aandelen * huidige_prijs
+
+    return huidige_waarde
+
+
+def alle_huidige_waarden_berekenen(totaal_aandelen, huidige_prijzen):
+    """
+    Berekent de huidige waarde per ticker.
+
+    Parameters:
+    totaal_aandelen (dict): per ticker het totaal aantal aandelen dat je bezit.
+    huidige_prijzen (dict): per ticker de huidige prijs van één aandeel.
+
+    Returns:
+    dict: per ticker de huidige waarde van de aandeelpositie.
+    """
+
+    alle_huidige_waarden = {}
+
+    for ticker, aantal_aandelen in totaal_aandelen.items():
+        huidige_prijs = huidige_prijzen[ticker]
+        huidige_waarde = huidige_waarde_berekenen(aantal_aandelen, huidige_prijs)
+        alle_huidige_waarden[ticker] = huidige_waarde
+
+    return alle_huidige_waarden

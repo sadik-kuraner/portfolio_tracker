@@ -4,7 +4,9 @@ from aandelen_berekeningen import (
     totaal_aantal_aandelen_berekenen,
     totale_investering_en_kosten,
     gak_berekenen,
+    alle_huidige_waarden_berekenen,
 )
+
 from aandelen_prijs_ophalen import alle_huidige_prijzen_ophalen
 
 # Verwerk de Excel-data zodat de berekeningen met schone gegevens werken
@@ -27,11 +29,15 @@ if schone_sheets is not None:
     tickers = list(schone_sheets.keys())
     huidige_prijzen = alle_huidige_prijzen_ophalen(tickers)
 
+    # Bereken de huidige waarde van elke aandeelpositie
+    huidige_waarde = alle_huidige_waarden_berekenen(totaal_aandelen, huidige_prijzen)
+
     # Toon de belangrijkste resultaten in de terminal
     print(totaal_aandelen)
     print(totale_investering_inclusief_kosten)
     print(gak)
     print(huidige_prijzen)
+    print(huidige_waarde)
 
 else:
     print("Geen data om te tonen")
