@@ -42,12 +42,22 @@ def clean_data(df):
     df (DataFrame): dataframe die schoongemaakt moet worden.
 
     Returns:
-    df (DataFrame): dataframe met alleen de gewenste rijen en kolommen,
-    zonder volledig lege rijen.
+    DataFrame: dataframe met alleen de gewenste kolommen die nodig zijn
+    voor de berekeningen, zonder lege rijen en zonder de rij "Totaal".
     """
 
+    # Pak alleen de eerste rijen en kolommen waar de tabel staat
     df = df.iloc[:37, :8]
+
+    # Verwijder de volledig lege rijen
     df = df.dropna(how="all")
+
+    # Gebruik de eerste kolom om de rij "Totaal" te verwijderen
+    eerste_kolom = df.iloc[:, 0].astype(str)
+    df = df[~eerste_kolom.str.contains("Totaal", case=False, na=False)]
+
+    # Bewaar daarna alleen de kolommen die je echt nodig hebt
+    df = df[["Maand", "Geïnvesteerd", "Aankoopprijs", "Kosten"]]
 
     return df
 
