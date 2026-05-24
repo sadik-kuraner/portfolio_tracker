@@ -19,9 +19,6 @@ def huidige_prijs_ophalen(ticker):
     return huidige_prijs
 
 
-prijs = huidige_prijs_ophalen("NVD.DE")
-
-
 def alle_huidige_prijzen_ophalen(tickers):
     """
     Haalt de huidige prijzen van alle tickers op.

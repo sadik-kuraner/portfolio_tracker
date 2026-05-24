@@ -1,15 +1,14 @@
 def aandelen_per_aankoop_berekenen(df):
     """
-    Berekent hoeveel aandelen je hebt gekocht obv je geïnvesteerd bedrag en aankoopprijs.
+    Haalt per aankoop het aantal aandelen op uit de Excel-data.
 
     Parameters:
-    df (DataFrame): dataframe met de kolommen Geïnvesteerd en Aankoopprijs.
+    df (DataFrame): dataframe met de kolom Aantal Aandelen.
 
     Returns:
     Series: aantal aandelen per aankoop.
-
     """
-    aantal_aandelen = df["Geïnvesteerd"] / df["Aankoopprijs"]
+    aantal_aandelen = df["Aantal Aandelen"]
 
     return aantal_aandelen
 
@@ -148,3 +147,35 @@ def alle_huidige_waarden_berekenen(totaal_aandelen, huidige_prijzen):
         alle_huidige_waarden[ticker] = huidige_waarde
 
     return alle_huidige_waarden
+
+
+def winst_verlies_berekenen(huidige_waarde, totale_investering_inclusief_kosten):
+    """
+    Berekent de winst of verlies van een ticker.
+
+    Parameters:
+    huidige_waarde (float): de huidige waarde van het aandeel.
+    totale_investering_inclusief_kosten (float): de totale investering inclusief
+    kosten van dit aandeel.
+
+    Returns:
+    float: de winst of verlies van een ticker.
+    """
+    winst_verlies_uitkomst = huidige_waarde - totale_investering_inclusief_kosten
+
+    return winst_verlies_uitkomst
+
+
+def alle_winst_verlies_berekenen(
+    alle_huidige_waarden, totale_investering_inclusief_kosten
+):
+
+    alle_winst_verlies = {}
+
+    for ticker, huidige_waarde in alle_huidige_waarden.items():
+        winst_verlies = winst_verlies_berekenen(
+            huidige_waarde, totale_investering_inclusief_kosten[ticker]
+        )
+        alle_winst_verlies[ticker] = winst_verlies
+
+    return alle_winst_verlies

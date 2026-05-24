@@ -5,6 +5,7 @@ from aandelen_berekeningen import (
     totale_investering_en_kosten,
     gak_berekenen,
     alle_huidige_waarden_berekenen,
+    alle_winst_verlies_berekenen,
 )
 
 from aandelen_prijs_ophalen import alle_huidige_prijzen_ophalen
@@ -32,12 +33,18 @@ if schone_sheets is not None:
     # Bereken de huidige waarde van elke aandeelpositie
     huidige_waarde = alle_huidige_waarden_berekenen(totaal_aandelen, huidige_prijzen)
 
+    # Bereken de winst of verlies van elke aandeelpositie
+    winst_verlies = alle_winst_verlies_berekenen(
+        huidige_waarde, totale_investering_inclusief_kosten
+    )
+
     # Toon de belangrijkste resultaten in de terminal
     print(totaal_aandelen)
     print(totale_investering_inclusief_kosten)
     print(gak)
     print(huidige_prijzen)
     print(huidige_waarde)
+    print(winst_verlies)
 
 else:
     print("Geen data om te tonen")

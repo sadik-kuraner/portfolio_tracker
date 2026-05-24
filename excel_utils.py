@@ -57,7 +57,7 @@ def clean_data(df):
     df = df[~eerste_kolom.str.contains("Totaal", case=False, na=False)]
 
     # Bewaar daarna alleen de kolommen die je echt nodig hebt
-    df = df[["Maand", "Geïnvesteerd", "Aankoopprijs", "Kosten"]]
+    df = df[["Maand", "Geïnvesteerd", "Aankoopprijs", "Aantal Aandelen", "Kosten"]]
 
     return df
 
