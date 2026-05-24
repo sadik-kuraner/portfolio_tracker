@@ -6,6 +6,7 @@ from aandelen_berekeningen import (
     gak_berekenen,
     alle_huidige_waarden_berekenen,
     alle_winst_verlies_berekenen,
+    alle_rendementen_berekenen,
 )
 
 from aandelen_prijs_ophalen import alle_huidige_prijzen_ophalen
@@ -38,6 +39,11 @@ if schone_sheets is not None:
         huidige_waarde, totale_investering_inclusief_kosten
     )
 
+    # Bereken het rendement in percentages van elke aandeelpositie
+    rendement = alle_rendementen_berekenen(
+        winst_verlies, totale_investering_inclusief_kosten
+    )
+
     # Toon de belangrijkste resultaten in de terminal
     print(totaal_aandelen)
     print(totale_investering_inclusief_kosten)
@@ -45,6 +51,7 @@ if schone_sheets is not None:
     print(huidige_prijzen)
     print(huidige_waarde)
     print(winst_verlies)
+    print(rendement)
 
 else:
     print("Geen data om te tonen")

@@ -179,3 +179,44 @@ def alle_winst_verlies_berekenen(
         alle_winst_verlies[ticker] = winst_verlies
 
     return alle_winst_verlies
+
+
+def rendement_berekenen(winst_verlies_uitkomst, totale_investering_inclusief_kosten):
+    """
+    Berekent het rendement in procenten voor een Ticker.
+
+    Parameters:
+    winst_verlies_uitkomst (float): de winst of verlies voor een Ticker.
+    totale_investering_inclusief_kosten (float): de totale investering inclusief kosten
+    voor een Ticker.
+
+    Returns:
+    float: het rendement voor een Ticker.
+    """
+    rendement_som = (winst_verlies_uitkomst / totale_investering_inclusief_kosten) * 100
+
+    return rendement_som
+
+
+def alle_rendementen_berekenen(alle_winst_verlies, totale_investering_inclusief_kosten):
+    """
+    Berekent het rendement in procenten voor iedere Ticker.
+
+    Parameters:
+    alle_winst_verlies (dict): dictionary waarbij de Ticker de key is en het winst/verlies de value.
+    totale_investering_inclusief_kosten (dict): dictionary waarbij de Ticker de key is en de totale
+    investering inclusief kosten de value.
+
+    Returns:
+    dict: dictionary waarbij de key de Ticker is en het rendement percentage de value.
+    """
+
+    alle_rendement = {}
+
+    for ticker, winst_verlies_uitkomst in alle_winst_verlies.items():
+        rendement = rendement_berekenen(
+            winst_verlies_uitkomst, totale_investering_inclusief_kosten[ticker]
+        )
+        alle_rendement[ticker] = rendement
+
+    return alle_rendement
