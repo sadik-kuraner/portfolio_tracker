@@ -7,6 +7,7 @@ from aandelen_berekeningen import (
     alle_huidige_waarden_berekenen,
     alle_winst_verlies_berekenen,
     alle_rendementen_berekenen,
+    alle_aandelen_samenvoegen,
 )
 
 from aandelen_prijs_ophalen import alle_huidige_prijzen_ophalen
@@ -44,6 +45,17 @@ if schone_sheets is not None:
         winst_verlies, totale_investering_inclusief_kosten
     )
 
+    # Combineer alle berekende waarden per ticker in één overzichtelijk tabel
+    alle_aandelen_compleet = alle_aandelen_samenvoegen(
+        totaal_aandelen,
+        totale_investering_inclusief_kosten,
+        gak,
+        huidige_prijzen,
+        huidige_waarde,
+        winst_verlies,
+        rendement,
+    )
+
     # Toon de belangrijkste resultaten in de terminal
     print(totaal_aandelen)
     print(totale_investering_inclusief_kosten)
@@ -52,6 +64,7 @@ if schone_sheets is not None:
     print(huidige_waarde)
     print(winst_verlies)
     print(rendement)
+    print(alle_aandelen_compleet)
 
 else:
     print("Geen data om te tonen")

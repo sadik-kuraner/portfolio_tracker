@@ -1,3 +1,6 @@
+import pandas as pd
+
+
 def aandelen_per_aankoop_berekenen(df):
     """
     Haalt per aankoop het aantal aandelen op uit de Excel-data.
@@ -220,3 +223,46 @@ def alle_rendementen_berekenen(alle_winst_verlies, totale_investering_inclusief_
         alle_rendement[ticker] = rendement
 
     return alle_rendement
+
+
+def alle_aandelen_samenvoegen(
+    totaal_aandelen,
+    totale_investering_inclusief_kosten,
+    gak,
+    huidige_prijzen,
+    huidige_waarde,
+    winst_verlies,
+    rendement,
+):
+    """
+    Combineert alle berekende waarden per ticker in één overzichtelijk DataFrame.
+
+    Parameters:
+    totaal_aandelen (dict): {ticker: totaal aantal aandelen}
+    totale_investering_inclusief_kosten (dict): {ticker: totale investering inclusief kosten in €}
+    gak (dict): {ticker: gemiddelde aankoopkoers in €}
+    huidige_prijzen (dict): {ticker: actuele prijs in €}
+    huidige_waarde (dict): {ticker: huidige waarde van de positie in €}
+    winst_verlies (dict): {ticker: winst of verlies in €}
+    rendement (dict): {ticker: rendement in %}
+
+    Returns:
+    pd.DataFrame: per rij één ticker met alle berekende waarden als kolommen.
+    """
+    alle_aandelen_samen = []
+
+    for ticker, aantal in totaal_aandelen.items():
+        rij = {
+            "Naam aandeel": ticker,
+            "Aantal stuks": aantal,
+            "Totale investering (€)": totale_investering_inclusief_kosten[ticker],
+            "Huidige prijs (€)": huidige_prijzen[ticker],
+            "Huidige waarde (€)": huidige_waarde[ticker],
+            "GAK (€)": gak[ticker],
+            "Winst/Verlies (€)": winst_verlies[ticker],
+            "Rendement (%)": rendement[ticker],
+        }
+
+        alle_aandelen_samen.append(rij)
+
+    return pd.DataFrame(alle_aandelen_samen)
