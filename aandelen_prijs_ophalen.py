@@ -14,7 +14,11 @@ def huidige_prijs_ophalen(ticker):
 
     aandeel = yf.Ticker(ticker)
     informatie = aandeel.info
+
     huidige_prijs = informatie.get("currentPrice")
+
+    if huidige_prijs is None:
+        huidige_prijs = informatie.get("regularMarketPrice")
 
     return huidige_prijs
 

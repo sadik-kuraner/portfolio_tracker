@@ -1,0 +1,1 @@
+1. Functie schrijven die "Verkocht" sheet inleest en verkochte aandelen aftrekt van totaal_aandelen

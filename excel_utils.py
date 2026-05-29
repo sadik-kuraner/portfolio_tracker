@@ -18,7 +18,15 @@ def input_excel_lezen(
         Geeft None terug als het bestand niet gelezen kan worden (error).
     """
     if gekozen_sheets is None:
-        gekozen_sheets = ["NVD.DE", "AMD.DE", "1YD.DE", "AMZ.DE"]
+        gekozen_sheets = [
+            "NVD.DE",
+            "AMD.DE",
+            "1YD.DE",
+            "AMZ.DE",
+            "6B0.MU",
+            "TOITF",
+            "MSF.DE",
+        ]
 
     try:
         aandelen_sheets = pd.read_excel(bestandspad, sheet_name=gekozen_sheets)
