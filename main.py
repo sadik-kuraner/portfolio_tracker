@@ -8,6 +8,7 @@ from aandelen_berekeningen import (
     alle_winst_verlies_berekenen,
     alle_rendementen_berekenen,
     alle_aandelen_samenvoegen,
+    verkochte_aandelen_aftrekken,
 )
 
 from aandelen_prijs_ophalen import alle_huidige_prijzen_ophalen
@@ -22,6 +23,9 @@ if schone_sheets is not None:
     # Bereken hoeveel aandelen er per ticker en in totaal zijn
     aantal_aandelen = aantal_aandelen_per_sheet(schone_sheets)
     totaal_aandelen = totaal_aantal_aandelen_berekenen(aantal_aandelen)
+
+    # Totaal aantal aandelen berekenen na aftrek van verkochte aandelen
+    totaal_aandelen = verkochte_aandelen_aftrekken(totaal_aandelen, verkochte_aandelen)
 
     # Bereken hoeveel geld er totaal is geïnvesteerd, inclusief kosten
     totale_investering, totale_kosten, totale_investering_inclusief_kosten = (
@@ -60,7 +64,6 @@ if schone_sheets is not None:
     )
 
     # Toon de belangrijkste resultaten in de terminal
-    print(verkochte_aandelen)
     print(totaal_aandelen)
     print(totale_investering_inclusief_kosten)
     print(gak)

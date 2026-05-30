@@ -55,6 +55,27 @@ def totaal_aantal_aandelen_berekenen(aandelen_per_sheet):
     return totaal_aantal_aandelen
 
 
+def verkochte_aandelen_aftrekken(totaal_aantal_aandelen, df):
+    """
+    Trekt per ticker de verkochte aandelen af van het totaal aantal aandelen
+
+    Parameters:
+    totaal_aantal_aandelen (dict): dictionary waarbij de Ticker de key is en aantal
+    aandelen de value.
+    df (DataFrame): dataframe met de kolommen 'Aandeel' en 'Aantal Verkocht'.
+
+    Returns:
+    dict: dictionary met Ticker als key en bijgewerkt aantal aandelen na aftrek van
+    verkopen als value.
+    """
+
+    for index, rij in df.iterrows():
+        if rij["Aandeel"] in totaal_aantal_aandelen:
+            totaal_aantal_aandelen[rij["Aandeel"]] -= rij["Aantal Verkocht"]
+
+    return totaal_aantal_aandelen
+
+
 def totale_investering_en_kosten(schone_sheets):
     """
     Geef per sheet: totale investering, totale kosten en totale investering inclusief kosten.
