@@ -9,6 +9,7 @@ from aandelen_berekeningen import (
     alle_rendementen_berekenen,
     alle_aandelen_samenvoegen,
     verkochte_aandelen_aftrekken,
+    verkochte_investering_aftrekken,
 )
 
 from aandelen_prijs_ophalen import alle_huidige_prijzen_ophalen
@@ -24,13 +25,18 @@ if schone_sheets is not None:
     aantal_aandelen = aantal_aandelen_per_sheet(schone_sheets)
     totaal_aandelen = totaal_aantal_aandelen_berekenen(aantal_aandelen)
 
-    # Totaal aantal aandelen berekenen na aftrek van verkochte aandelen
-    totaal_aandelen = verkochte_aandelen_aftrekken(totaal_aandelen, verkochte_aandelen)
-
     # Bereken hoeveel geld er totaal is geïnvesteerd, inclusief kosten
     totale_investering, totale_kosten, totale_investering_inclusief_kosten = (
         totale_investering_en_kosten(schone_sheets)
     )
+
+    # Pas de investering en het aantal aandelen aan op basis van verkochte aandelen
+    totale_investering_inclusief_kosten = verkochte_investering_aftrekken(
+        totale_investering_inclusief_kosten, totaal_aandelen, verkochte_aandelen
+    )
+
+    # Totaal aantal aandelen berekenen na aftrek van verkochte aandelen
+    totaal_aandelen = verkochte_aandelen_aftrekken(totaal_aandelen, verkochte_aandelen)
 
     # Bereken de gemiddelde aankoopkoers per aandeel
     gak = gak_berekenen(totale_investering_inclusief_kosten, totaal_aandelen)

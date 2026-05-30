@@ -106,6 +106,32 @@ def totale_investering_en_kosten(schone_sheets):
     return totale_investering, totale_kosten, totale_investering_inclusief_kosten
 
 
+def verkochte_investering_aftrekken(
+    totale_investering_inclusief_kosten, totaal_aandelen, df
+):
+    """
+    Trekt de verkochte investering van de totale investering af.
+
+    Parameters:
+    totale_investering_inclusief_kosten (dict): dictionary met Ticker als key en totale investering
+    inclusief kosten als value.
+    totaal_aandelen (dict): dictionary met Ticker als key en totaal aantal aandelen als value.
+    df (DataFrame): dataframe met de kolommen 'Aandeel' en 'Aantal Verkocht'.
+
+    Returns:
+    dict: dictionary met Ticker als key en bijgewerkte totale investering inclusief kosten als value.
+    """
+
+    for index, rij in df.iterrows():
+        if rij["Aandeel"] in totale_investering_inclusief_kosten:
+            proportie = rij["Aantal Verkocht"] / totaal_aandelen[rij["Aandeel"]]
+            totale_investering_inclusief_kosten[rij["Aandeel"]] -= (
+                proportie * totale_investering_inclusief_kosten[rij["Aandeel"]]
+            )
+
+    return totale_investering_inclusief_kosten
+
+
 def gak_berekenen(totale_investering_inclusief_kosten, totaal_aantal_aandelen):
     """
     Berekent de GAK (Gemiddelde Aankoopprijs) per sheet.
