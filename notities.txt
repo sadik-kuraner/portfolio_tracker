@@ -1,1 +1,14 @@
-1. Functie schrijven die "Verkocht" sheet inleest en verkochte aandelen aftrekt van totaal_aandelen
+ Te schrijven functies:
+
+   excel_utils.py:
+   - verkochte_aandelen_lezen(): leest de "Verkocht" sheet in, verwijdert lege
+     rijen en de Totaal-rij, geeft alleen kolommen "Aandeel" en "Aantal Verkocht" terug
+
+   aandelen_berekeningen.py:
+   - verkochte_aandelen_aftrekken(totaal_aandelen, verkochte_df): trekt per ticker
+     het aantal verkochte aandelen af van totaal_aandelen. Let op: ticker in
+     Verkocht-sheet ("AMD") kan afwijken van sheetnaam ("AMD.DE")
+
+   main.py:
+   - Na totaal_aandelen = totaal_aantal_aandelen_berekenen(...):
+     verkochte_df inlezen en verkochte_aandelen_aftrekken() aanroepen

@@ -90,3 +90,34 @@ def verwerk_excel_data():
         schone_sheets[sheet_naam] = clean_data(df)
 
     return schone_sheets
+
+
+def verkochte_aandelen_lezen(bestandspad="EDCA - Aandelen.xlsx", gekozen_sheets=None):
+    """
+    Leest de data vanuit de "Verkocht" sheet en verwijdert lege rijen en kolommen.
+    Verwijdert daarnaast de 'Totaal' rij en filtert op twee kolommen.
+
+    Parameters:
+    bestandspad (str): het pad naar het Excel-bestand.
+    gekozen_sheets (list | None): namen van de sheets die ingelezen moeten worden.
+    Als dit None is, wordt de standaard sheet ingelezen.
+
+    Returns:
+    DataFrame: de kolommen 'Aandeel' en 'Aantal Verkocht' vanuit de geselecteerde sheet als DataFrame.
+    """
+
+    if gekozen_sheets is None:
+        gekozen_sheets = ["Verkocht"]
+
+    verkocht_sheet_inlezen = pd.read_excel(bestandspad, sheet_name=gekozen_sheets)
+
+    df = verkocht_sheet_inlezen["Verkocht"]
+
+    df = df.dropna(how="all")
+
+    eerste_kolom = df.iloc[:, 0].astype(str)
+    df = df[~eerste_kolom.str.contains("Totaal", case=False, na=False)]
+
+    df = df[["Aandeel", "Aantal Verkocht"]]
+
+    return df

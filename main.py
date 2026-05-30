@@ -1,4 +1,4 @@
-from excel_utils import verwerk_excel_data
+from excel_utils import verwerk_excel_data, verkochte_aandelen_lezen
 from aandelen_berekeningen import (
     aantal_aandelen_per_sheet,
     totaal_aantal_aandelen_berekenen,
@@ -14,6 +14,9 @@ from aandelen_prijs_ophalen import alle_huidige_prijzen_ophalen
 
 # Verwerk de Excel-data zodat de berekeningen met schone gegevens werken
 schone_sheets = verwerk_excel_data()
+
+# Lees de verkochte aandelen in en filter de juiste kolommen
+verkochte_aandelen = verkochte_aandelen_lezen()
 
 if schone_sheets is not None:
     # Bereken hoeveel aandelen er per ticker en in totaal zijn
@@ -57,6 +60,7 @@ if schone_sheets is not None:
     )
 
     # Toon de belangrijkste resultaten in de terminal
+    print(verkochte_aandelen)
     print(totaal_aandelen)
     print(totale_investering_inclusief_kosten)
     print(gak)
