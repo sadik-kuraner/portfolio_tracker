@@ -8,6 +8,7 @@ from aandelen_berekeningen import (
     alle_winst_verlies_berekenen,
     alle_rendementen_berekenen,
     alle_aandelen_samenvoegen,
+    totaalwaarde_portfolio_berekenen,
 )
 
 from aandelen_prijs_ophalen import alle_huidige_prijzen_ophalen
@@ -59,6 +60,8 @@ if schone_sheets is not None:
         rendement,
     )
 
+    totaalwaarden_portfolio = totaalwaarde_portfolio_berekenen(alle_aandelen_compleet)
+
     # Toon de belangrijkste resultaten in de terminal
     print(totaal_aandelen)
     print(totale_investering_inclusief_kosten)
@@ -68,6 +71,7 @@ if schone_sheets is not None:
     print(winst_verlies)
     print(rendement)
     print(alle_aandelen_compleet)
+    print(totaalwaarden_portfolio)
 
 else:
     print("Geen data om te tonen")

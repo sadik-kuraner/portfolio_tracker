@@ -313,3 +313,30 @@ def alle_aandelen_samenvoegen(
         alle_aandelen_samen.append(rij)
 
     return pd.DataFrame(alle_aandelen_samen)
+
+
+def totaalwaarde_portfolio_berekenen(alle_aandelen_samen):
+    """
+    Berekent de totaalwaarden van het portfolio uit de alle_aandelen_samen DataFrame.
+
+    Parameters:
+    alle_aandelen_samen (DataFrame): DataFrame met per ticker de berekende waarden als kolommen.
+
+    Returns:
+    dict: dictionary met de totale investering, huidige waarde, winst/verlies en rendement van het portfolio.
+    """
+
+    totale_investering = alle_aandelen_samen["Totale investering (€)"].sum()
+    totale_huidige_waarde = alle_aandelen_samen["Huidige waarde (€)"].sum()
+    totale_winst_verlies = alle_aandelen_samen["Winst/Verlies (€)"].sum()
+    totaal_rendement = totale_winst_verlies / totale_investering * 100
+
+    totaal = {
+        "Totaal": None,
+        "Totale investering (€)": totale_investering,
+        "Totale huidige waarde (€)": totale_huidige_waarde,
+        "Totale winst/verlies (€)": totale_winst_verlies,
+        "Totaal rendement (%)": totaal_rendement,
+    }
+
+    return totaal
