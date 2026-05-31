@@ -1,4 +1,4 @@
-from excel_utils import verwerk_excel_data, verkochte_aandelen_lezen
+from excel_utils import verwerk_excel_data, rijen_overslaan
 from aandelen_berekeningen import (
     aantal_aandelen_per_sheet,
     totaal_aantal_aandelen_berekenen,
@@ -8,8 +8,6 @@ from aandelen_berekeningen import (
     alle_winst_verlies_berekenen,
     alle_rendementen_berekenen,
     alle_aandelen_samenvoegen,
-    verkochte_aandelen_aftrekken,
-    verkochte_investering_aftrekken,
 )
 
 from aandelen_prijs_ophalen import alle_huidige_prijzen_ophalen
@@ -17,8 +15,8 @@ from aandelen_prijs_ophalen import alle_huidige_prijzen_ophalen
 # Verwerk de Excel-data zodat de berekeningen met schone gegevens werken
 schone_sheets = verwerk_excel_data()
 
-# Lees de verkochte aandelen in en filter de juiste kolommen
-verkochte_aandelen = verkochte_aandelen_lezen()
+# Verwijder de eerste 3 rijen van AMD.DE (verkochte aankopen)
+schone_sheets = rijen_overslaan(schone_sheets, aantal_rijen=3, ticker="AMD.DE")
 
 if schone_sheets is not None:
     # Bereken hoeveel aandelen er per ticker en in totaal zijn
@@ -29,14 +27,6 @@ if schone_sheets is not None:
     totale_investering, totale_kosten, totale_investering_inclusief_kosten = (
         totale_investering_en_kosten(schone_sheets)
     )
-
-    # Pas de investering en het aantal aandelen aan op basis van verkochte aandelen
-    totale_investering_inclusief_kosten = verkochte_investering_aftrekken(
-        totale_investering_inclusief_kosten, totaal_aandelen, verkochte_aandelen
-    )
-
-    # Totaal aantal aandelen berekenen na aftrek van verkochte aandelen
-    totaal_aandelen = verkochte_aandelen_aftrekken(totaal_aandelen, verkochte_aandelen)
 
     # Bereken de gemiddelde aankoopkoers per aandeel
     gak = gak_berekenen(totale_investering_inclusief_kosten, totaal_aandelen)

@@ -116,3 +116,24 @@ def verkochte_aandelen_lezen(bestandspad="EDCA - Aandelen.xlsx"):
     df = df[["Aandeel", "Aantal Verkocht"]]
 
     return df
+
+
+def rijen_overslaan(schone_sheets, aantal_rijen, ticker="AMD.DE"):
+    """
+    Verwijdert de eerste (aantal_rijen) rijen van de opgegeven ticker uit schone_sheets.
+
+    Parameters:
+    schone_sheets (dict): dictionary met Tickers als key en schoongemaakt DataFrames
+    als value.
+    aantal_rijen (int): het aantal rijen dat verwijderd moet worden.
+    ticker (str): de naam van de Ticker.
+
+    Returns:
+    dict: Ticker als key en de DataFrame zonder de eerste aantal rijen als value.
+    """
+
+    if ticker in schone_sheets:
+        df = schone_sheets[ticker]
+        schone_sheets[ticker] = df.iloc[aantal_rijen:]
+
+    return schone_sheets
