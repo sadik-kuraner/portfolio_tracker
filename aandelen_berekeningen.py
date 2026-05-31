@@ -340,3 +340,31 @@ def totaalwaarde_portfolio_berekenen(alle_aandelen_samen):
     }
 
     return totaal
+
+
+def gewicht_per_aandeel_berekenen(alle_aandelen_samen, totaalwaarden_portfolio):
+    """
+    Berekent het gewicht per aandeel als percentage van het totale portfolio.
+
+    Parameters:
+    alle_aandelen_samen (DataFrame): DataFrame met per ticker de berekende waarden als kolommen.
+    totaalwaarden_portfolio (dict): dictionary met portfolio totalen als keys en berekende bedragen
+    als values.
+
+    Returns:
+    dict: dictionary met Ticker (Naam aandeel) als key en het gewicht in percentage als value.
+
+    """
+    gewicht_per_aandeel = {}
+
+    df = alle_aandelen_samen
+
+    for index, rij in df.iterrows():
+        gewicht = (
+            rij["Huidige waarde (€)"]
+            / totaalwaarden_portfolio["Totale huidige waarde (€)"]
+            * 100
+        )
+        gewicht_per_aandeel[rij["Naam aandeel"]] = gewicht
+
+    return gewicht_per_aandeel

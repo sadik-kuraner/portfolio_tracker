@@ -9,6 +9,7 @@ from aandelen_berekeningen import (
     alle_rendementen_berekenen,
     alle_aandelen_samenvoegen,
     totaalwaarde_portfolio_berekenen,
+    gewicht_per_aandeel_berekenen,
 )
 
 from aandelen_prijs_ophalen import alle_huidige_prijzen_ophalen
@@ -62,6 +63,11 @@ if schone_sheets is not None:
 
     totaalwaarden_portfolio = totaalwaarde_portfolio_berekenen(alle_aandelen_compleet)
 
+    # Bereken het gewicht van elke aandeelpositie als percentage van het totale portfolio
+    gewicht_per_aandeel = gewicht_per_aandeel_berekenen(
+        alle_aandelen_compleet, totaalwaarden_portfolio
+    )
+
     # Toon de belangrijkste resultaten in de terminal
     print(totaal_aandelen)
     print(totale_investering_inclusief_kosten)
@@ -72,6 +78,7 @@ if schone_sheets is not None:
     print(rendement)
     print(alle_aandelen_compleet)
     print(totaalwaarden_portfolio)
+    print(gewicht_per_aandeel)
 
 else:
     print("Geen data om te tonen")
