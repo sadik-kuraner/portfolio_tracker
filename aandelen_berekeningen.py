@@ -368,3 +368,25 @@ def gewicht_per_aandeel_berekenen(alle_aandelen_samen, totaalwaarden_portfolio):
         gewicht_per_aandeel[rij["Naam aandeel"]] = gewicht
 
     return gewicht_per_aandeel
+
+
+def gewicht_toevoegen_aan_df(alle_aandelen_samen, gewicht_per_aandeel):
+    """
+    Voegt de kolom 'Gewicht (%)' toe aan de alle_aandelen DataFrame.
+
+    Parameters:
+    alle_aandelen_samen (DataFrame): DataFrame met een totaaloverzicht van
+    alle aandelen inclusief de kolommen.
+    gewicht_per_aandeel (dict): dictionary waarbij de Ticker de key is
+    en het gewicht de value.
+
+    Returns:
+    alle_aandelen_samen DataFrame: DataFrame met per ticker de berekende waarden
+    als kolommen.
+    """
+
+    df = alle_aandelen_samen
+
+    df["Gewicht (%)"] = df["Naam aandeel"].map(gewicht_per_aandeel)
+
+    return df

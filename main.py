@@ -1,4 +1,4 @@
-from excel_utils import verwerk_excel_data, rijen_overslaan, gewicht_toevoegen_aan_df
+from excel_utils import verwerk_excel_data, rijen_overslaan, output_excel_schrijven
 from aandelen_berekeningen import (
     aantal_aandelen_per_sheet,
     totaal_aantal_aandelen_berekenen,
@@ -10,6 +10,7 @@ from aandelen_berekeningen import (
     alle_aandelen_samenvoegen,
     totaalwaarde_portfolio_berekenen,
     gewicht_per_aandeel_berekenen,
+    gewicht_toevoegen_aan_df,
 )
 
 from aandelen_prijs_ophalen import alle_huidige_prijzen_ophalen
@@ -73,18 +74,13 @@ if schone_sheets is not None:
         alle_aandelen_compleet, gewicht_per_aandeel
     )
 
-    # Toon de belangrijkste resultaten in de terminal
-    print(totaal_aandelen)
-    print(totale_investering_inclusief_kosten)
-    print(gak)
-    print(huidige_prijzen)
-    print(huidige_waarde)
-    print(winst_verlies)
-    print(rendement)
-    print(alle_aandelen_compleet)
-    print(totaalwaarden_portfolio)
-    print(gewicht_per_aandeel)
-    print(aandelen_compleet_inclusief_gewicht)
+    # Voeg totaalrij toe aan de DataFrame en sla het op in een Excel-bestand.
+    output_tonen = output_excel_schrijven(
+        aandelen_compleet_inclusief_gewicht, totaalwaarden_portfolio
+    )
+
+    # Toon het eindresultaat
+    print(output_tonen)
 
 else:
     print("Geen data om te tonen")

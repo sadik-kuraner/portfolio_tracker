@@ -139,23 +139,39 @@ def rijen_overslaan(schone_sheets, aantal_rijen, ticker="AMD.DE"):
     return schone_sheets
 
 
-def gewicht_toevoegen_aan_df(alle_aandelen_samen, gewicht_per_aandeel):
+def output_excel_schrijven(
+    aandelen_compleet_inclusief_gewicht, totaalwaarden_portfolio
+):
     """
-    Voegt de kolom 'Gewicht (%)' toe aan de alle_aandelen DataFrame.
+    Schrijft de portfolio output naar een Excel-bestand, inclusief een totaalrij onderaan.
 
     Parameters:
-    alle_aandelen_samen (DataFrame): DataFrame met een totaaloverzicht van
-    alle aandelen inclusief de kolommen.
-    gewicht_per_aandeel (dict): dictionary waarbij de Ticker de key is
-    en het gewicht de value.
+    aandelen_compleet_inclusief_gewicht (DataFrame): DataFrame met per ticker
+    de berekende waarden als kolommen.
+    totaalwaarden_portfolio (dict): dictionary met portfolio totalen als keys
+    en berekende bedragen als values.
 
     Returns:
-    alle_aandelen_samen DataFrame: DataFrame met per ticker de berekende waarden
-    als kolommen.
+    DataFrame: aandelen_compleet_inclusief_gewicht inclusief totaalrij.
     """
+    totaalrij = {
+        "Naam aandeel": "Totaal",
+        "Aantal stuks": None,
+        "Totale investering (€)": totaalwaarden_portfolio["Totale investering (€)"],
+        "Huidige prijs (€)": None,
+        "Huidige waarde (€)": totaalwaarden_portfolio["Totale huidige waarde (€)"],
+        "Gewicht (%)": 100,
+        "GAK (€)": None,
+        "Winst/Verlies (€)": totaalwaarden_portfolio["Totale winst/verlies (€)"],
+        "Rendement (%)": totaalwaarden_portfolio["Totaal rendement (%)"],
+    }
 
-    df = alle_aandelen_samen
+    totaalrij = pd.DataFrame([totaalrij])
 
-    df["Gewicht (%)"] = df["Naam aandeel"].map(gewicht_per_aandeel)
+    df_met_totaal = pd.concat(
+        [aandelen_compleet_inclusief_gewicht, totaalrij], ignore_index=True
+    )
 
-    return df
+    df_met_totaal.to_excel("Aandelen Portfolio Rendement.xlsx", index=False)
+
+    return df_met_totaal
