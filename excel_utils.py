@@ -137,3 +137,25 @@ def rijen_overslaan(schone_sheets, aantal_rijen, ticker="AMD.DE"):
         schone_sheets[ticker] = df.iloc[aantal_rijen:]
 
     return schone_sheets
+
+
+def gewicht_toevoegen_aan_df(alle_aandelen_samen, gewicht_per_aandeel):
+    """
+    Voegt de kolom 'Gewicht (%)' toe aan de alle_aandelen DataFrame.
+
+    Parameters:
+    alle_aandelen_samen (DataFrame): DataFrame met een totaaloverzicht van
+    alle aandelen inclusief de kolommen.
+    gewicht_per_aandeel (dict): dictionary waarbij de Ticker de key is
+    en het gewicht de value.
+
+    Returns:
+    alle_aandelen_samen DataFrame: DataFrame met per ticker de berekende waarden
+    als kolommen.
+    """
+
+    df = alle_aandelen_samen
+
+    df["Gewicht (%)"] = df["Naam aandeel"].map(gewicht_per_aandeel)
+
+    return df

@@ -1,4 +1,4 @@
-from excel_utils import verwerk_excel_data, rijen_overslaan
+from excel_utils import verwerk_excel_data, rijen_overslaan, gewicht_toevoegen_aan_df
 from aandelen_berekeningen import (
     aantal_aandelen_per_sheet,
     totaal_aantal_aandelen_berekenen,
@@ -68,6 +68,11 @@ if schone_sheets is not None:
         alle_aandelen_compleet, totaalwaarden_portfolio
     )
 
+    # Voeg kolom 'Gewicht (%)' toe aan alle_aandelen_compleet DataFrame
+    aandelen_compleet_inclusief_gewicht = gewicht_toevoegen_aan_df(
+        alle_aandelen_compleet, gewicht_per_aandeel
+    )
+
     # Toon de belangrijkste resultaten in de terminal
     print(totaal_aandelen)
     print(totale_investering_inclusief_kosten)
@@ -79,6 +84,7 @@ if schone_sheets is not None:
     print(alle_aandelen_compleet)
     print(totaalwaarden_portfolio)
     print(gewicht_per_aandeel)
+    print(aandelen_compleet_inclusief_gewicht)
 
 else:
     print("Geen data om te tonen")
