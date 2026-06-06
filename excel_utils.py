@@ -172,6 +172,8 @@ def output_excel_schrijven(
         [aandelen_compleet_inclusief_gewicht, totaalrij], ignore_index=True
     )
 
+    df_met_totaal = df_met_totaal.round(2)
+
     df_met_totaal.to_excel("Aandelen Portfolio Rendement.xlsx", index=False)
 
     return df_met_totaal
