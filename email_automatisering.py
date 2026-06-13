@@ -1,5 +1,6 @@
 import json
 from datetime import datetime
+import os
 
 
 def snapshot_opslaan(aandelen_compleet_inclusief_gewicht, totaalwaarden_portfolio):
@@ -20,7 +21,25 @@ def snapshot_opslaan(aandelen_compleet_inclusief_gewicht, totaalwaarden_portfoli
         "totaalwaarden": totaalwaarden_portfolio,
     }
 
-    datum = datetime.now().strftime("%d-%m-%Y")
+    datum = datetime.now().strftime("%Y-%m-%d")
 
     with open(f"snapshots/snapshot_{datum}.json", "w") as f:
         json.dump(compleet_overzicht, f, indent=4, ensure_ascii=False)
+
+
+def vorige_snapshot_inlezen():
+    """
+    Leest de portfolio data in van de laatste JSON-snapshot.
+
+    Returns:
+    dict: dictionary van de meest recente portfolio data.
+    """
+
+    snapshot_lijst = os.listdir("snapshots/")
+
+    laatste_snapshot = sorted(snapshot_lijst)[-1]
+
+    with open(f"snapshots/{laatste_snapshot}", "r") as f:
+        data = json.load(f)
+
+    return data
