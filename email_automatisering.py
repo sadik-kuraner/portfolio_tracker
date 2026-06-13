@@ -13,7 +13,7 @@ def snapshot_opslaan(aandelen_compleet_inclusief_gewicht, totaalwaarden_portfoli
     als values.
     """
 
-    aandelen_compleet = aandelen_compleet_inclusief_gewicht.to_dict()
+    aandelen_compleet = aandelen_compleet_inclusief_gewicht.to_dict(orient="records")
 
     compleet_overzicht = {
         "aandelen_overzicht": aandelen_compleet,
@@ -22,5 +22,5 @@ def snapshot_opslaan(aandelen_compleet_inclusief_gewicht, totaalwaarden_portfoli
 
     datum = datetime.now().strftime("%d-%m-%Y")
 
-    with open(f"snapshot_{datum}.json", "w") as f:
-        json.dump(compleet_overzicht, f)
+    with open(f"snapshots/snapshot_{datum}.json", "w") as f:
+        json.dump(compleet_overzicht, f, indent=4, ensure_ascii=False)
