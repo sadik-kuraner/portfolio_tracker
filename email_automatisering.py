@@ -12,6 +12,9 @@ def snapshot_opslaan(aandelen_compleet_inclusief_gewicht, totaalwaarden_portfoli
     als kolommen.
     totaalwaarden_portfolio (dict): dictionary met portfolio totalen als keys en berekende waarden
     als values.
+
+    Returns:
+    dict: dictionary met keys 'aandelen_overzicht' (list) en 'totaalwaarden' (dict).
     """
 
     aandelen_compleet = aandelen_compleet_inclusief_gewicht.to_dict(orient="records")
@@ -25,6 +28,8 @@ def snapshot_opslaan(aandelen_compleet_inclusief_gewicht, totaalwaarden_portfoli
 
     with open(f"snapshots/snapshot_{datum}.json", "w") as f:
         json.dump(compleet_overzicht, f, indent=4, ensure_ascii=False)
+
+    return compleet_overzicht
 
 
 def vorige_snapshot_inlezen():
