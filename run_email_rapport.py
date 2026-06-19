@@ -1,5 +1,9 @@
 from main import run_portfolio_tracker
-from email_automatisering import snapshot_opslaan, vorige_snapshot_inlezen
+from email_automatisering import (
+    snapshot_opslaan,
+    vorige_snapshot_inlezen,
+    mail_versturen,
+)
 from claude_api import claude_samenvatting_genereren
 
 # Runt de portfolio tracker en slaat resultaat op in Excel-bestand
@@ -15,3 +19,6 @@ huidige_snapshot = snapshot_opslaan(
 
 # Maakt een korte samenvatting van de portfolio data en vergelijkt het met data van vorige week.
 samenvatting = claude_samenvatting_genereren(huidige_snapshot, vorige_snapshot)
+
+# Maakt de mail op inclusief bijlagen en verstuurt de mail.
+mail_versturen(samenvatting)
