@@ -1,3 +1,0 @@
-mail_versturen() functie:
-- Docstring schrijven
-- Functie aanroepen in run_email_rapport.py
