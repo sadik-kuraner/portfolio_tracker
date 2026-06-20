@@ -1,0 +1,31 @@
+name: Wekelijks Portfolio Rapport
+
+on:
+  schedule:
+    - cron: "0 20 * * 5"  # Elke vrijdag om 22:00 NL tijd (UTC+2 = 20:00 UTC)
+  workflow_dispatch:       # Handmatig triggeren via GitHub
+
+jobs:
+  run-rapport:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repository ophalen
+        uses: actions/checkout@v4
+
+      - name: Python instellen
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: uv installeren
+        uses: astral-sh/setup-uv@v3
+
+      - name: Dependencies installeren
+        run: uv sync
+
+      - name: Rapport genereren en versturen
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          EMAIL_WACHTWOORD: ${{ secrets.EMAIL_WACHTWOORD }}
+        run: uv run run_email_rapport.py
