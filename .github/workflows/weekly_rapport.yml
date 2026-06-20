@@ -24,6 +24,9 @@ jobs:
       - name: Dependencies installeren
         run: uv sync
 
+      - name: Snapshots map aanmaken
+        run: mkdir -p snapshots
+
       - name: Rapport genereren en versturen
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}

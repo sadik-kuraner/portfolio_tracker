@@ -12,13 +12,19 @@ def claude_samenvatting_genereren(huidige_snapshot, vorige_snapshot):
 
     Parameters:
     huidige_snapshot (dict): dictionary snapshot van de meest recente portfolio data.
-    vorige_snapshot (dict): dictionary snapshot van de portfolio data van de week ervoor.
+    vorige_snapshot (dict | None): dictionary snapshot van de portfolio data van de week ervoor.
+    None als er nog geen vorige snapshot beschikbaar is.
 
     Returns:
     str: een samenvatting in normale tekst.
     """
 
     client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
+
+    if vorige_snapshot is None:
+        vorige_snapshot_tekst = "Geen data van vorige week beschikbaar."
+    else:
+        vorige_snapshot_tekst = vorige_snapshot
 
     try:
         message = client.messages.create(
@@ -37,7 +43,7 @@ def claude_samenvatting_genereren(huidige_snapshot, vorige_snapshot):
                         {huidige_snapshot}
 
                         Portfolio data vorige week:
-                        {vorige_snapshot}
+                        {vorige_snapshot_tekst}
                         """,
                 }
             ],

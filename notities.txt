@@ -1,4 +1,2 @@
 TODO:
-- Snapshot terugpushen naar repo na GitHub Actions run
-  (workflow moet na run_email_rapport.py de nieuwe snapshot committen en pushen naar GitHub)
 - Class schrijven op basis van dit project ter oefening

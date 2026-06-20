@@ -42,10 +42,14 @@ def vorige_snapshot_inlezen():
     Leest de portfolio data in van de laatste JSON-snapshot.
 
     Returns:
-    dict: dictionary van de meest recente portfolio data.
+    dict | None: dictionary van de meest recente portfolio data.
+    None als er nog geen snapshots zijn.
     """
 
     snapshot_lijst = os.listdir("snapshots/")
+
+    if not snapshot_lijst:
+        return None
 
     laatste_snapshot = sorted(snapshot_lijst)[-1]
 
