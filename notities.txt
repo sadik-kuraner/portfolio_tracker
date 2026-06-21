@@ -1,2 +1,0 @@
-TODO:
-- Class schrijven op basis van dit project ter oefening
