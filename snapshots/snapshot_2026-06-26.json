@@ -1,0 +1,88 @@
+{
+    "aandelen_overzicht": [
+        {
+            "Naam aandeel": "NVD.DE",
+            "Aantal stuks": 77.5,
+            "Totale investering (€)": 10348.95,
+            "Huidige prijs (€)": 169.98,
+            "Huidige waarde (€)": 13173.449999999999,
+            "GAK (€)": 133.53483870967742,
+            "Winst/Verlies (€)": 2824.499999999998,
+            "Rendement (%)": 27.292623889380064,
+            "Gewicht (%)": 37.364584598465974
+        },
+        {
+            "Naam aandeel": "AMD.DE",
+            "Aantal stuks": 25.4,
+            "Totale investering (€)": 3783.28,
+            "Huidige prijs (€)": 451.8,
+            "Huidige waarde (€)": 11475.72,
+            "GAK (€)": 148.948031496063,
+            "Winst/Verlies (€)": 7692.439999999999,
+            "Rendement (%)": 203.32727157387237,
+            "Gewicht (%)": 32.54921913153411
+        },
+        {
+            "Naam aandeel": "1YD.DE",
+            "Aantal stuks": 9.1,
+            "Totale investering (€)": 2699.98,
+            "Huidige prijs (€)": 323.9,
+            "Huidige waarde (€)": 2947.49,
+            "GAK (€)": 296.70109890109893,
+            "Winst/Verlies (€)": 247.50999999999976,
+            "Rendement (%)": 9.167104941518076,
+            "Gewicht (%)": 8.360128854486295
+        },
+        {
+            "Naam aandeel": "AMZ.DE",
+            "Aantal stuks": 17.7,
+            "Totale investering (€)": 3351.34,
+            "Huidige prijs (€)": 203.6,
+            "Huidige waarde (€)": 3603.72,
+            "GAK (€)": 189.3412429378531,
+            "Winst/Verlies (€)": 252.37999999999965,
+            "Rendement (%)": 7.530719055661307,
+            "Gewicht (%)": 10.221430286613135
+        },
+        {
+            "Naam aandeel": "6B0.MU",
+            "Aantal stuks": 152.0,
+            "Totale investering (€)": 2013.5,
+            "Huidige prijs (€)": 15.082,
+            "Huidige waarde (€)": 2292.464,
+            "GAK (€)": 13.24671052631579,
+            "Winst/Verlies (€)": 278.96399999999994,
+            "Rendement (%)": 13.85468090389868,
+            "Gewicht (%)": 6.502242394128927
+        },
+        {
+            "Naam aandeel": "TOITF",
+            "Aantal stuks": 17.0,
+            "Totale investering (€)": 1220.3999999999999,
+            "Huidige prijs (€)": 65.51,
+            "Huidige waarde (€)": 1113.67,
+            "GAK (€)": 71.78823529411764,
+            "Winst/Verlies (€)": -106.72999999999979,
+            "Rendement (%)": -8.745493280891495,
+            "Gewicht (%)": 3.158763796103041
+        },
+        {
+            "Naam aandeel": "MSF.DE",
+            "Aantal stuks": 2.0,
+            "Totale investering (€)": 819.6,
+            "Huidige prijs (€)": 325.0,
+            "Huidige waarde (€)": 650.0,
+            "GAK (€)": 409.8,
+            "Winst/Verlies (€)": -169.60000000000002,
+            "Rendement (%)": -20.693020985846758,
+            "Gewicht (%)": 1.8436309386685255
+        }
+    ],
+    "totaalwaarden": {
+        "Totaal": null,
+        "Totale investering (€)": 24237.050000000003,
+        "Totale huidige waarde (€)": 35256.513999999996,
+        "Totale winst/verlies (€)": 11019.463999999996,
+        "Totaal rendement (%)": 45.465368103791484
+    }
+}
